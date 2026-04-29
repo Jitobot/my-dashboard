@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+    overflow: hidden;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: 100vh;
+    gap: 16px;
+    padding: 16px;
+}
+
+.panel {
+    background-color: #16213e;
+    border-radius: 12px;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+.panel h2 {
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+    color: #a8b2d1;
+    border-bottom: 1px solid #2a3a5c;
+    padding-bottom: 8px;
+}
+
+.panel-clock {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.clock-section {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.date-text {
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: #ccd6f6;
+}
+
+.time-text {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #64ffda;
+    letter-spacing: 4px;
+}
+
+.weather-section {
+    flex: 1;
+}
+
+.panel-calendar {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.panel-memo {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.panel-todo {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.placeholder {
+    color: #4a5568;
+    font-style: italic;
+}
