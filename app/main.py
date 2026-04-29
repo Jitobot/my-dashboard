@@ -6,7 +6,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from app.database import Base, engine
-from app.routers import memo, weather
+from app.routers import bookmarks, calendar, memo, news, weather
 
 
 @asynccontextmanager
@@ -22,6 +22,9 @@ templates = Jinja2Templates(directory="app/templates")
 
 app.include_router(memo.router)
 app.include_router(weather.router)
+app.include_router(calendar.router)
+app.include_router(bookmarks.router)
+app.include_router(news.router)
 
 
 @app.get("/", response_class=HTMLResponse)

@@ -8,14 +8,24 @@
 </head>
 <body>
     <div class="dashboard">
+        <!-- 左上: 時計 + ブックマーク + 天気 -->
         <div class="panel panel-clock">
             <div class="clock-section">
                 <div id="date" class="date-text"></div>
                 <div id="time" class="time-text"></div>
             </div>
+            <div class="bookmark-bar" id="bookmark-bar">
+                <button class="bookmark-add-btn" id="bm-toggle">+ 追加</button>
+            </div>
+            <div class="bookmark-form" id="bookmark-form">
+                <input type="text" id="bm-icon" class="bm-input bm-icon-input" placeholder="🔗" maxlength="2">
+                <input type="text" id="bm-title" class="bm-input bm-title-input" placeholder="タイトル">
+                <input type="text" id="bm-url" class="bm-input bm-url-input" placeholder="https://...">
+                <button id="bm-add" class="bm-submit-btn">OK</button>
+            </div>
             <div class="weather-section">
                 <div class="weather-header">
-                    <h2>天気</h2>
+                    <span class="section-title">天気</span>
                     <select id="city-select" class="city-select"></select>
                 </div>
                 <div id="weather-current" class="weather-current">
@@ -25,20 +35,33 @@
             </div>
         </div>
 
-        <div class="panel panel-calendar">
-            <h2>今日の予定</h2>
-            <p class="placeholder">Phase 5 で実装</p>
-        </div>
-
+        <!-- 左下: メモ -->
         <div class="panel panel-memo">
-            <h2>メモ</h2>
+            <span class="section-title">メモ</span>
             <textarea id="memo" class="memo-textarea" placeholder="自由にメモを書けます..."></textarea>
             <div id="memo-status" class="memo-status"></div>
         </div>
 
-        <div class="panel panel-todo">
-            <h2>ToDo</h2>
-            <p class="placeholder">Phase 4 で実装</p>
+        <!-- 右列: カレンダー + ToDo + ニュース -->
+        <div class="right-column">
+            <div class="calendar-section">
+                <span class="section-title">今日の予定</span>
+                <div id="calendar-events" class="calendar-events">
+                    <p class="placeholder">読み込み中...</p>
+                </div>
+            </div>
+            <div class="todo-section">
+                <span class="section-title">ToDo</span>
+                <div id="todo-list" class="todo-list">
+                    <p class="placeholder">読み込み中...</p>
+                </div>
+            </div>
+            <div class="news-section">
+                <span class="section-title">ニュース</span>
+                <div id="news-list" class="news-list">
+                    <p class="placeholder">読み込み中...</p>
+                </div>
+            </div>
         </div>
     </div>
     <script src="/static/js/app.js"></script>

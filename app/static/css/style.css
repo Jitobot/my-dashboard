@@ -11,6 +11,17 @@ body {
     overflow: hidden;
 }
 
+/* スクロールバーを目立たなくする */
+.panel::-webkit-scrollbar,
+.right-column::-webkit-scrollbar {
+    width: 4px;
+}
+.panel::-webkit-scrollbar-thumb,
+.right-column::-webkit-scrollbar-thumb {
+    background-color: #2a3a5c;
+    border-radius: 4px;
+}
+
 .dashboard {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -23,11 +34,11 @@ body {
 .panel {
     background-color: #16213e;
     border-radius: 12px;
-    padding: 24px;
+    padding: 20px;
     overflow-y: auto;
 }
 
-.panel h2 {
+.section-title {
     font-size: 1.2rem;
     margin-bottom: 16px;
     color: #a8b2d1;
@@ -35,34 +46,147 @@ body {
     padding-bottom: 8px;
 }
 
+/* === 左上: 時計 + ブックマーク + 天気 === */
 .panel-clock {
     grid-column: 1;
     grid-row: 1;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .clock-section {
     text-align: center;
-    padding: 20px 0;
+    padding: 12px 0 8px;
 }
 
 .date-text {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 300;
     color: #ccd6f6;
 }
 
 .time-text {
-    font-size: 4rem;
+    font-size: 3.2rem;
     font-weight: 700;
     color: #64ffda;
     letter-spacing: 4px;
 }
 
+/* ブックマーク（時計下に付属） */
+.bookmark-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 6px 0;
+    align-items: center;
+    border-bottom: 1px solid #2a3a5c;
+    margin-bottom: 8px;
+}
+
+.bookmark-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    background-color: #1a1a2e;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #ccd6f6;
+    font-size: 0.75rem;
+    transition: background-color 0.2s;
+    position: relative;
+}
+
+.bookmark-item:hover {
+    background-color: #2a3a5c;
+}
+
+.bookmark-icon {
+    font-size: 0.85rem;
+}
+
+.bookmark-delete {
+    display: none;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    font-size: 0.5rem;
+    cursor: pointer;
+    line-height: 14px;
+    text-align: center;
+}
+
+.bookmark-item:hover .bookmark-delete {
+    display: block;
+}
+
+.bookmark-add-btn {
+    padding: 3px 8px;
+    background: none;
+    border: 1px dashed #2a3a5c;
+    border-radius: 6px;
+    color: #4a5568;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+.bookmark-add-btn:hover {
+    border-color: #64ffda;
+    color: #64ffda;
+}
+
+/* ブックマーク追加フォーム（モーダル風） */
+.bookmark-form {
+    display: none;
+    gap: 4px;
+    padding: 6px 0;
+    flex-wrap: wrap;
+}
+
+.bookmark-form.active {
+    display: flex;
+}
+
+.bm-input {
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+    border: 1px solid #2a3a5c;
+    border-radius: 6px;
+    padding: 3px 6px;
+    font-size: 0.75rem;
+    outline: none;
+}
+
+.bm-icon-input { width: 32px; text-align: center; }
+.bm-title-input { width: 80px; }
+.bm-url-input { flex: 1; min-width: 100px; }
+
+.bm-input:focus { border-color: #64ffda; }
+
+.bm-submit-btn {
+    background-color: #64ffda;
+    color: #1a1a2e;
+    border: none;
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* 天気 */
 .weather-section {
     flex: 1;
-    overflow-y: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .weather-header {
@@ -71,7 +195,7 @@ body {
     justify-content: space-between;
 }
 
-.weather-header h2 {
+.weather-header .section-title {
     margin-bottom: 0;
     border-bottom: none;
     padding-bottom: 0;
@@ -82,8 +206,8 @@ body {
     color: #e0e0e0;
     border: 1px solid #2a3a5c;
     border-radius: 6px;
-    padding: 4px 8px;
-    font-size: 0.85rem;
+    padding: 3px 6px;
+    font-size: 0.8rem;
     outline: none;
     cursor: pointer;
 }
@@ -91,48 +215,53 @@ body {
 .weather-current {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 12px 0;
+    gap: 12px;
+    padding: 8px 0;
 }
 
-.weather-icon {
-    font-size: 2.5rem;
-}
+.weather-icon { font-size: 2rem; }
 
 .weather-temp {
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: #ccd6f6;
 }
 
 .weather-detail {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: #8892b0;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
 .weather-hourly {
     display: flex;
-    gap: 2px;
-    overflow-x: auto;
-    padding-bottom: 4px;
+    gap: 1px;
+    overflow-x: hidden;
+    flex: 1;
+    align-items: flex-end;
 }
 
 .hourly-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 44px;
+    flex: 1;
+    min-width: 0;
     font-size: 0.7rem;
     color: #8892b0;
     gap: 2px;
 }
 
+.hourly-item span:nth-child(2) {
+    font-size: 1.1rem;
+}
+
 .hourly-bar-container {
-    width: 24px;
-    height: 40px;
+    width: 100%;
+    max-width: 24px;
+    height: 50px;
     background-color: #1a1a2e;
-    border-radius: 4px;
+    border-radius: 3px;
     display: flex;
     align-items: flex-end;
     overflow: hidden;
@@ -141,36 +270,24 @@ body {
 .hourly-bar {
     width: 100%;
     background-color: #4fc3f7;
-    border-radius: 4px 4px 0 0;
-    transition: height 0.3s;
+    border-radius: 3px 3px 0 0;
 }
 
 .hourly-prob {
-    font-size: 0.65rem;
+    font-size: 0.55rem;
     color: #4fc3f7;
 }
 
-.panel-calendar {
-    grid-column: 2;
-    grid-row: 1;
+.hourly-date-sep {
+    font-size: 0.55rem;
+    color: #64ffda;
+    font-weight: 700;
 }
 
+/* === 左下: メモ === */
 .panel-memo {
     grid-column: 1;
     grid-row: 2;
-}
-
-.panel-todo {
-    grid-column: 2;
-    grid-row: 2;
-}
-
-.placeholder {
-    color: #4a5568;
-    font-style: italic;
-}
-
-.panel-memo {
     display: flex;
     flex-direction: column;
 }
@@ -182,7 +299,7 @@ body {
     color: #e0e0e0;
     border: 1px solid #2a3a5c;
     border-radius: 8px;
-    padding: 12px;
+    padding: 10px;
     font-family: inherit;
     font-size: 1rem;
     line-height: 1.6;
@@ -190,14 +307,157 @@ body {
     outline: none;
 }
 
-.memo-textarea:focus {
-    border-color: #64ffda;
-}
+.memo-textarea:focus { border-color: #64ffda; }
 
 .memo-status {
-    margin-top: 8px;
-    font-size: 0.8rem;
+    margin-top: 4px;
+    font-size: 0.75rem;
     color: #4a5568;
     text-align: right;
-    min-height: 1.2em;
+    min-height: 1em;
+}
+
+/* === 右列: カレンダー + ToDo + ニュース === */
+.right-column {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    background-color: #16213e;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    overflow-y: auto;
+}
+
+/* カレンダー */
+.calendar-events {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.event-item {
+    display: flex;
+    gap: 16px;
+    padding: 10px 12px;
+    background-color: #1a1a2e;
+    border-radius: 8px;
+    border-left: 3px solid #64ffda;
+}
+
+.event-time {
+    font-size: 0.95rem;
+    color: #64ffda;
+    white-space: nowrap;
+    min-width: 110px;
+}
+
+.event-summary {
+    font-size: 0.95rem;
+    color: #ccd6f6;
+}
+
+.no-events {
+    color: #4a5568;
+    font-style: italic;
+    text-align: center;
+    padding: 12px 0;
+}
+
+/* ToDo */
+.todo-section { }
+
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.todo-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background-color: #1a1a2e;
+    border-radius: 8px;
+}
+
+.todo-checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: #64ffda;
+    cursor: pointer;
+}
+
+.todo-title {
+    font-size: 0.95rem;
+    color: #ccd6f6;
+}
+
+.todo-title.done {
+    text-decoration: line-through;
+    color: #4a5568;
+}
+
+.todo-list-name {
+    margin-left: auto;
+    font-size: 0.7rem;
+    color: #4a5568;
+}
+
+/* ニュース */
+.news-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.news-list::-webkit-scrollbar { width: 4px; }
+.news-list::-webkit-scrollbar-thumb {
+    background-color: #2a3a5c;
+    border-radius: 4px;
+}
+
+.news-item {
+    display: block;
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #ccd6f6;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+
+.news-item:hover {
+    background-color: #2a3a5c;
+}
+
+.news-time {
+    font-size: 0.7rem;
+    color: #4a5568;
+    margin-left: 6px;
+}
+
+.placeholder {
+    color: #4a5568;
+    font-style: italic;
+}
+
+.auth-message {
+    text-align: center;
+    padding: 12px;
+    color: #4a5568;
 }
