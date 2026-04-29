@@ -83,3 +83,35 @@ body {
     color: #4a5568;
     font-style: italic;
 }
+
+.panel-memo {
+    display: flex;
+    flex-direction: column;
+}
+
+.memo-textarea {
+    flex: 1;
+    width: 100%;
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+    border: 1px solid #2a3a5c;
+    border-radius: 8px;
+    padding: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.6;
+    resize: none;
+    outline: none;
+}
+
+.memo-textarea:focus {
+    border-color: #64ffda;
+}
+
+.memo-status {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: #4a5568;
+    text-align: right;
+    min-height: 1.2em;
+}
