@@ -62,6 +62,92 @@ body {
 
 .weather-section {
     flex: 1;
+    overflow-y: auto;
+}
+
+.weather-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.weather-header h2 {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.city-select {
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+    border: 1px solid #2a3a5c;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 0.85rem;
+    outline: none;
+    cursor: pointer;
+}
+
+.weather-current {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+}
+
+.weather-icon {
+    font-size: 2.5rem;
+}
+
+.weather-temp {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ccd6f6;
+}
+
+.weather-detail {
+    font-size: 0.85rem;
+    color: #8892b0;
+    line-height: 1.6;
+}
+
+.weather-hourly {
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+
+.hourly-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 44px;
+    font-size: 0.7rem;
+    color: #8892b0;
+    gap: 2px;
+}
+
+.hourly-bar-container {
+    width: 24px;
+    height: 40px;
+    background-color: #1a1a2e;
+    border-radius: 4px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+}
+
+.hourly-bar {
+    width: 100%;
+    background-color: #4fc3f7;
+    border-radius: 4px 4px 0 0;
+    transition: height 0.3s;
+}
+
+.hourly-prob {
+    font-size: 0.65rem;
+    color: #4fc3f7;
 }
 
 .panel-calendar {
